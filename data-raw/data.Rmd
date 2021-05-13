@@ -1,0 +1,98 @@
+---
+title: Clean aggregation 2 data
+author: Shir Dekel
+date: '`r format(Sys.time())`'
+output_format: html_document
+---
+
+Load packages and functions
+
+```{r}
+source(DataPackageR::project_path("packages.R"))
+project_path("R") %>%
+  list.files(full.names = TRUE) %>%
+  lapply(source)
+```
+
+Clean data
+
+```{r}
+data_raw_prep <-
+  project_extdata_path("JSPsychData15-01-2021 12 39.csv") %>%
+  read_csv(col_types = cols()) %>%
+  select(sectionName, sectionValue, time_elapsed, dateCreated) %>%
+  pivot_wider(
+    names_from = "sectionName",
+    values_from = "sectionValue"
+  ) %>%
+  rowwise() %>%
+  mutate(
+    across(c(experiment, sample, stage), ~ .x %>%
+      map_if(validate, fromJSON) %>%
+      unlist()),
+    across(experiment, ~ .x %>%
+      recode("aggregation_exp2" = "experiment2")),
+    thesis_project = "aggregation",
+    similarity = "high"
+  ) %>%
+  ungroup() %>%
+  column_fromJSON(c(stage)) %>%
+  select(
+    stage,
+    time_elapsed,
+    dateCreated,
+    subject,
+    experiment,
+    sample,
+    similarity,
+    awareness,
+    presentation,
+    distribution,
+    button_pressed,
+    responses,
+    question_order,
+    thesis_project
+  ) %>%
+  filter(
+    experiment == "experiment2",
+    thesis_project == "aggregation"
+  )
+
+data_combined <-
+  tibble()
+
+names_to <-
+  c("project", "outcome_positive", "outcome_dif", "probability_positive")
+
+data_combined <-
+  data_raw_prep %>%
+  clean_data_separate(names_to) %>%
+  bind_rows(data_combined)
+
+data_combined <-
+  data_raw_prep %>%
+  clean_data_joint(names_to) %>%
+  bind_rows(data_combined)
+
+data_combined <-
+  data_raw_prep %>%
+  clean_data_other("project_choice") %>%
+  inner_join(data_combined, by = "subject")
+
+data_combined <-
+  data_raw_prep %>%
+  clean_data_portfolio_binary() %>%
+  inner_join(data_combined, by = "subject")
+
+data <-
+  data_combined %>%
+  clean_data_combined() %>%
+  clean_data_finalise(
+    test = FALSE,
+    prolific_filter = NULL,
+    prolific_filter_label = NULL
+  ) %>%
+  ## Remove non-essential information
+  select(-c(contact, address, prolific, company_name))
+```
+
