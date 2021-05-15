@@ -36,7 +36,7 @@ clean_data_finalise <- function(data, test, prolific_filter,
   }
 
     data %>%
-        remove_duplicates() %>%
+        shirthesis::remove_duplicates() %>%
         shirthesis::add_id_column(subject)
 
 }

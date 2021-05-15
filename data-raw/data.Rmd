@@ -36,7 +36,7 @@ data_raw_prep <-
     similarity = "high"
   ) %>%
   ungroup() %>%
-  column_fromJSON(c(stage)) %>%
+  shirthesis::column_fromJSON(c(stage)) %>%
   select(
     stage,
     time_elapsed,
@@ -66,7 +66,7 @@ names_to <-
 
 data_combined <-
   data_raw_prep %>%
-  clean_data_separate(names_to) %>%
+  shirthesis::clean_data_separate(names_to) %>%
   bind_rows(data_combined)
 
 data_combined <-
@@ -76,17 +76,17 @@ data_combined <-
 
 data_combined <-
   data_raw_prep %>%
-  clean_data_other("project_choice") %>%
+  shirthesis::clean_data_other("project_choice") %>%
   inner_join(data_combined, by = "subject")
 
 data_combined <-
   data_raw_prep %>%
-  clean_data_portfolio_binary() %>%
+  shirthesis::clean_data_portfolio_binary() %>%
   inner_join(data_combined, by = "subject")
 
 data <-
   data_combined %>%
-  clean_data_combined() %>%
+  shirthesis::clean_data_combined() %>%
   clean_data_finalise(
     test = FALSE,
     prolific_filter = NULL,
