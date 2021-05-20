@@ -700,7 +700,7 @@ jsPsych.init(
 {
   "timeline": [timeline],
   "experiment_width": [750],
-  "preload_images": [],
+  "preload_images": ["resource/image/gambles_plot_experiment2.png"],
   "on_finish": {}
 }
 );
