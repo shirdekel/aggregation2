@@ -17,7 +17,7 @@ get_plan <- function() {
         10
       ),
       ## Seed needed to recreate old target with different name. Generated from
-      ## `diagnose(restricted_values)$gambles` in the original thesis project.
+      ## `diagnose(gambles)$seed` in the original thesis project.
       seed = 336030447
     ),
     experiment_resources = target(
@@ -39,7 +39,6 @@ get_plan <- function() {
     experiment = target(
       {
         shirthesis::get_experiment(
-          gambles,
           experiment_directory = file.path("inst", "jspsych"),
           experiment_resources,
           main,
@@ -53,6 +52,23 @@ get_plan <- function() {
       },
       target = "file"
     ),
-    materials = get_screenshots(experiment)
+    main_testing = get_main(gambles, randomize_order = FALSE),
+    experiment_testing = target(
+      {
+        shirthesis::get_experiment(
+          experiment_directory = file.path("inst", "jspsych", "testing"),
+          experiment_resources,
+          main_testing,
+          post_experiment = get_post_experiment(),
+          columns = get_columns(),
+          condition_allocation = get_condition_allocation(),
+          ethics = FALSE,
+          on_finish = NULL
+        )
+        file.path("inst", "jspsych", "testing", "experiment")
+      },
+      target = "file"
+    ),
+    materials = get_screenshots(experiment_testing),
   )
 }
