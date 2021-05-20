@@ -6,30 +6,30 @@
 get_post_experiment <- function() {
 
   trial_project_number <-
-    get_trial_project_number()
+    shirthesis::get_trial_project_number()
 
   preamble_portfolio_distribution_present <-
     get_preamble_distribution()
 
   trial_portfolio_binary_distribution_present <-
-    get_trial_portfolio_binary(
+    shirthesis::get_trial_portfolio_binary(
       preamble = preamble_portfolio_distribution_present,
       distribution = "present"
     )
 
   trial_portfolio_binary_distribution_absent <-
-    get_trial_portfolio_binary(
+    shirthesis::get_trial_portfolio_binary(
       distribution = "absent"
     )
 
   trial_portfolio_number_distribution_present <-
-    get_trial_portfolio_number(
+    shirthesis::get_trial_portfolio_number(
       preamble = preamble_portfolio_distribution_present,
       distribution = "present"
     )
 
   trial_portfolio_number_distribution_absent <-
-    get_trial_portfolio_number(
+    shirthesis::get_trial_portfolio_number(
       distribution = "absent"
     )
 
@@ -37,7 +37,7 @@ get_post_experiment <- function() {
   ##   get_debrief()
 
   trial_end <-
-    get_trial_end()
+    shirthesis::get_trial_end()
 
   post_experiment <-
     build_timeline(
