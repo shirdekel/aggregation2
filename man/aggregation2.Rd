@@ -18,4 +18,5 @@ _datasets() to load them.
 }
 \seealso{
 \link{data}
+\link{power}
 }

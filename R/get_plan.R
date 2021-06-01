@@ -70,5 +70,6 @@ get_plan <- function() {
       target = "file"
     ),
     materials = get_screenshots(experiment_testing),
+    power = get_power()
   )
 }

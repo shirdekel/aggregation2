@@ -19,6 +19,8 @@ library(janitor)
 library(jaysire)
 library(htmltools)
 library(js)
+library(MOTE)
+library(pwr)
 
 conflict_prefer("filter", "dplyr")
 conflict_prefer("flatten", "purrr")

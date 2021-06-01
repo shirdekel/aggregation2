@@ -10,7 +10,9 @@
 #' _datasets() to load them.
 #' @seealso
 #' \link{data}
+#' \link{power}
 NULL
+
 
 
 
@@ -64,6 +66,22 @@ NULL
 #' \item{expected_value}{}
 #' \item{gain_loss_ratio}{}
 #' \item{date_rank}{}
+#' }
+#' @source The data comes from________________________.
+#' @seealso
+#' \link{aggregation2}
+NULL
+
+
+
+
+
+#' Detailed description of the data
+#' @name power
+#' @docType data
+#' @title Descriptive data title
+#' @format a \code{numeric} containing the following fields:
+#' \describe{
 #' }
 #' @source The data comes from________________________.
 #' @seealso
