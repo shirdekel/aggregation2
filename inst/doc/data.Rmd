@@ -97,7 +97,9 @@ data <-
     prolific_filter_label = NULL
   ) %>%
   ## Remove non-essential information
-  select(-c(contact, address, prolific, company_name))
+  select(-c(contact, address, prolific, company_name)) %>%
+  ## Remove under 18s (only one 16 year old)
+  filter(!age < 18)
 ```
 
 
