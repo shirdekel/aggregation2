@@ -14,10 +14,22 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 DataVersion: 0.1.2
-Date: 2021-06-03
+Date: 2021-07-11
 Suggests: 
     knitr,
     rmarkdown
 VignetteBuilder: knitr
 URL: https://github.com/shirdekel/aggregation2
 BugReports: https://github.com/shirdekel/aggregation2/issues
+Imports: 
+    dplyr,
+    cowplot,
+    rlang,
+    afex,
+    ggplot2,
+    papaja,
+    purrr,
+    shirthesis (>= 0.0.0.9000),
+    forcats
+Remotes: 
+    shirdekel/shirthesis
