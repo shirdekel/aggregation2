@@ -30,6 +30,8 @@ Imports:
     papaja,
     purrr,
     shirthesis (>= 0.0.0.9000),
-    forcats
+    forcats,
+    magrittr,
+    tibble
 Remotes: 
     shirdekel/shirthesis

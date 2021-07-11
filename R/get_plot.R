@@ -132,7 +132,7 @@ get_plot <- function(data = aggregation2::data) {
     shirthesis::plot_trials(data)
 
   plot_aggregation_2 <-
-    lst(
+    tibble::lst(
       choice_binary,
       choice_proportion,
       portfolio_number,
