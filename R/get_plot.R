@@ -135,6 +135,9 @@ get_plot <- function(data = aggregation2::data) {
     tibble::lst(
       choice_binary,
       choice_proportion,
+      choice_proportion_presentation,
+      choice_proportion_awareness,
+      choice_proportion_distribution,
       portfolio_number,
       portfolio_binary,
       choice_trials,
